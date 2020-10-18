@@ -1,11 +1,17 @@
 import React, {useState} from "react"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faSave, faPlus, faSms, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
+import {  faPlus, faSms, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
 import Modal from 'react-bootstrap/Modal'
 import CustomerForm from "./CustomerForm"
+import CustomerSearchForm from "./CustomerSearchForm"
 import SmsForm from "../Sms/SmsForm"
+import CustomerList from "./CustomerList"
 const Customer = props => {
-    //
+    //Static Customer List
+const USERS = [
+    {id: Math.random() , name:"Arnold Kofi", mobile:"0200111391", email :"darneltaphil@gmail.com", address:"Off Ashiyie Road", city:"Accra", gps:"GD-143-9857", image:"https://via.placeholder.com/25" },
+    {id: Math.random() ,name:"Gifty Mensah Kafui", mobile:"0541265854", email :"darneltaphil@gmail.com", address:"Off Ashiyie Road", city:"Accra", gps:"GD-143-9857", image:"https://via.placeholder.com/25" },
+]
     //handle Modal Show/Close
 const [show, setShow] = useState(false);
 const handleCustomerModalClose = () => setShow(false);
@@ -54,12 +60,15 @@ return (
             <h6 className="m-0 font-weight-bold text-primary">Manage Customers</h6>
           </div>
           <div className="card-body pl-3" id="clientlist">
-              
+            <CustomerSearchForm />
 
+              <CustomerList  items={USERS}/>
           </div>
         </div>
           </div>
-          <Modal
+
+
+        <Modal
                 show={show}
                 onHide={handleCustomerModalClose}
                 backdrop="static"
@@ -85,7 +94,7 @@ return (
       </Modal>
 
 
-            <Modal
+        <Modal
                 show={smsModal}
                 onHide={handleSmsModalClose}
                 backdrop="static"

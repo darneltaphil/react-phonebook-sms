@@ -1,6 +1,6 @@
 import React from "react"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faEllipsisV, faPlus, faSms, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
+import { faEllipsisV, faPlus } from "@fortawesome/free-solid-svg-icons"
 import SmsForm from "./SmsForm"
 const Sms = () => {
     return (
