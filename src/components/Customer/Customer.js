@@ -6,6 +6,7 @@ import CustomerForm from "./CustomerForm"
 import CustomerSearchForm from "./CustomerSearchForm"
 import SmsForm from "../Sms/SmsForm"
 import CustomerList from "./CustomerList"
+import {VALIDATOR_REQUIRE} from '../Utils/Validators'
 const Customer = props => {
     //Static Customer List
 const USERS = [
@@ -60,7 +61,7 @@ return (
             <h6 className="m-0 font-weight-bold text-primary">Manage Customers</h6>
           </div>
           <div className="card-body pl-3" id="clientlist">
-            <CustomerSearchForm />
+            <CustomerSearchForm validator={[VALIDATOR_REQUIRE()]}  />
 
               <CustomerList  items={USERS}/>
           </div>
