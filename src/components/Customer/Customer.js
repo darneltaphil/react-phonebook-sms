@@ -31,20 +31,20 @@ return (
         {/*Tabed Menu Row*/}
            <div className="row">
               <div className="col-lg-12 col-md-12 col-sd-12 mb-3">
-                  <div onClick={handleCustomerModalShow} href="#" id="AddNewClient" className="btn btn-primary btn-icon-split mx-2" data-toggle="modal" data-target="#AddNewClient_modal" data-backdrop="static" data-keyboard="false" >
+                  <div onClick={handleCustomerModalShow} id="AddNewClient" className="btn btn-primary btn-icon-split mx-2" data-toggle="modal" data-target="#AddNewClient_modal" data-backdrop="static" data-keyboard="false" >
                   <span className="icon text-white-50">
                   <FontAwesomeIcon icon={faPlus} />
                   </span>
                   <span className="text">New Customer</span>
                 </div>
-                <div onClick={handleSmsModalShow} href="#" id="sms_to_all" className="btn btn-success btn-icon-split mx-2">
+                <div onClick={handleSmsModalShow}  id="sms_to_all" className="btn btn-success btn-icon-split mx-2">
                   <span className="icon text-white-50">
                   <FontAwesomeIcon icon={faSms} />
                   </span>
                   <span className="text">Send SMS to all</span>
                 </div>
 
-                <div  href="#" id="refreshlist" className="btn btn-warning btn-icon-split mx-2 ">
+                <div id="refreshlist" className="btn btn-warning btn-icon-split mx-2 ">
                   <span className="icon text-white-50">
                   <FontAwesomeIcon icon={faSyncAlt} />
                   </span>

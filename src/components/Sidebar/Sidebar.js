@@ -1,11 +1,14 @@
-import React from "react"
+import React, { useContext } from "react"
 import { faSignOutAlt, faSlidersH, faSms, faTachometerAlt, faUser } from "@fortawesome/free-solid-svg-icons";
 import SidebarMenuItem from "./SidebarMenuItem"
 import Navbar from "react-bootstrap/Navbar"
 import Nav from "react-bootstrap/Nav"
+import { AuthContext } from "../Shared/context/auth-context"
+
 
 
 const Sidebar = () => {
+  const auth= useContext(AuthContext);
     return (
         <Navbar  expand="lg" className=" bg-gradient-primary text-white mb-3 ">
         <Navbar.Brand  className=" text-white  pr-5 ">
@@ -15,10 +18,11 @@ const Sidebar = () => {
 
         <Navbar.Collapse className=" text-white  " id="responsive-navbar-nav" >
             <Nav className="mr-auto text-white">
-                <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faTachometerAlt} name="Dashboard" link="/"  /></Nav.Link>
+                <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faTachometerAlt} name="Dashboard" link="/dashboard"  /></Nav.Link>
                 <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faUser} name="Customer" link="/customer"  /></Nav.Link>
                 <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faSms} name="Send SMS"  link="/sms" /></Nav.Link>
                 <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faSlidersH} name="Settings" link="/settings"  /></Nav.Link>
+                <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faSignOutAlt} name="Logout" link="/login" onClick={auth.logout}  /></Nav.Link>
             </Nav>
           
         </Navbar.Collapse>

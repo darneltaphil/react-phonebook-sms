@@ -12,14 +12,14 @@ const CustomerForm = () => {
           <Container>
             <Row>
                 <Col xs={12} md={12}>
-                <Image src="holder.js/171x180" roundedCircle  />
+                <Image src="https://via.placeholder.com/100" roundedCircle  />
                 </Col>
             </Row>
             </Container>                 
             </div></center>
           </div>
         </div>
-        <hr className="sidebar-divider my-5"/> 
+        <hr className="sidebar-divider mb-5"/> 
 
         <div className="form-row">
           <div className="form-group col-md-12">

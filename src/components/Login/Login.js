@@ -1,8 +1,27 @@
-import React from "react"
+import React, {useState, useContext} from "react"
+import { Link } from "react-router-dom"
+import {
+   VALIDATOR_EMAIL,
+    VALIDATOR_MIN 
+  } from "../Utils/Validators"
+  import {AuthContext} from "../Shared/context/auth-context"
 
 const Login = () => {
-    return(
-<body className="bg-gradient-primary">
+  const auth= useContext(AuthContext);
+
+  const [email , setEmail ]= useState('')
+  const [password, setPassword] = useState('')
+
+
+ const authSubmitHandler = e => {
+  e.preventDefault();
+   auth.login();   
+   console.log(auth.login()) 
+ }
+
+    return( 
+
+<div className="bg-gradient-primary">
 
   <div className="container">
 
@@ -19,28 +38,39 @@ const Login = () => {
                   <div className="text-center">
                     <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
                   </div>
-                  <form className="user">
+                  <form className="user" onSubmit={authSubmitHandler}>
                     <div className="form-group">
-                      <input type="email" className="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address..." />
+                      <input 
+                      type="email" 
+                      className="form-control form-control-user" 
+                      id="exampleInputEmail" 
+                      aria-describedby="emailHelp" 
+                      placeholder="Enter Email Address..."
+                      validators={[VALIDATOR_EMAIL()]} />
                     </div>
                     <div className="form-group">
-                      <input type="password" className="form-control form-control-user" id="exampleInputPassword" placeholder="Password"/>
+                      <input 
+                      type="password"
+                       className="form-control form-control-user" 
+                       id="exampleInputPassword" 
+                       placeholder="Password"
+                       validators={[VALIDATOR_EMAIL()]} />
                     </div>
                     <div className="form-group">
                       <div className="custom-control custom-checkbox small">
-                        <input type="checkbox" className="custom-control-input" id="customCheck"/>
+                        <input 
+                        type="checkbox" 
+                        className="custom-control-input" 
+                        id="customCheck"/>
                         <label className="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <a href="index.html" className="btn btn-primary btn-user btn-block">
+                    <button type="submit"  className="btn btn-primary btn-user btn-block">
                       Login
-                    </a>
+                    </button>
                     <hr/>
                     <a href="index.html" className="btn btn-google btn-user btn-block">
                       <i className="fab fa-google fa-fw"></i> Login with Google
-                    </a>
-                    <a href="index.html" className="btn btn-facebook btn-user btn-block">
-                      <i className="fab fa-facebook-f fa-fw"></i> Login with Facebook
                     </a>
                   </form>
                   <hr/>
@@ -48,7 +78,7 @@ const Login = () => {
                     <a className="small" href="forgot-password.html">Forgot Password?</a>
                   </div>
                   <div className="text-center">
-                    <a className="small" href="register.html">Create an Account!</a>
+                    <Link to="/signup" className="small" href="register.html">Create an Account!</Link>
                   </div>
                 </div>
               </div>
@@ -61,15 +91,8 @@ const Login = () => {
     </div>
 
   </div>
+</div>
 
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <script src="js/sb-admin-2.min.js"></script>
-
-</body>
 
     )
 }
