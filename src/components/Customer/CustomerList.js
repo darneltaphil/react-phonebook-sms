@@ -1,10 +1,11 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import CustomerItem from "./CustomerItem"
 import Accordion from 'react-bootstrap/Accordion'
 
 const CustomerList = props => {
-    // console.log(props)
-    if(props.items.length === 0){
+    const [receivedProps, setReceivedProps] = useState(props)
+    console.log(receivedProps)
+    if(receivedProps.items.length === 0){
         return(
             <div className="">
                 <h2> No Customer Found</h2>
@@ -13,7 +14,7 @@ const CustomerList = props => {
     }
 return(
     <>
-    {props.items.map(customer =>(
+    {receivedProps.items.map(customer =>(
             <Accordion  >
         <CustomerItem 
             key={customer.id}

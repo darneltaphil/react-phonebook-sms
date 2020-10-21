@@ -8,6 +8,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.11",
+    "axios": "^0.20.0",
     "bootstrap": "^4.5.3",
     "cra-template": "1.0.3",
     "jquery": "^3.5.1",
@@ -19,6 +20,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "react-transition-group": "^4.4.1",
+    "sweetalert2": "^10.7.0",
     "uuid": "^8.3.1"
   },
   "scripts": {

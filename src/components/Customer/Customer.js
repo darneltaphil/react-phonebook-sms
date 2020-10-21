@@ -1,4 +1,4 @@
-import React, {useState} from "react"
+import React, {useState, useCallback } from "react"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {  faPlus, faSms, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
 import Modal from 'react-bootstrap/Modal'
@@ -7,12 +7,16 @@ import CustomerSearchForm from "./CustomerSearchForm"
 import SmsForm from "../Sms/SmsForm"
 import CustomerList from "./CustomerList"
 import {VALIDATOR_REQUIRE} from '../Utils/Validators'
-const Customer = props => {
+import swal from "sweetalert2"
+import axios from "axios"
+
+const Customer = () => {
     //Static Customer List
 const USERS = [
     {id: Math.random() , name:"Arnold Kofi", mobile:"0200111391", email :"darneltaphil@gmail.com", address:"Off Ashiyie Road", city:"Accra", gps:"GD-143-9857", image:"https://via.placeholder.com/25" },
     {id: Math.random() ,name:"Gifty Mensah Kafui", mobile:"0541265854", email :"darneltaphil@gmail.com", address:"Off Ashiyie Road", city:"Accra", gps:"GD-143-9857", image:"https://via.placeholder.com/25" },
 ]
+
     //handle Modal Show/Close
 const [show, setShow] = useState(false);
 const handleCustomerModalClose = () => setShow(false);
@@ -21,6 +25,25 @@ const handleCustomerModalShow = () => setShow(true);
 const [smsModal, setSmsModal]= useState(false);
 const handleSmsModalClose = () => setSmsModal(false);
 const handleSmsModalShow = () => setSmsModal(true);
+
+const [loadedCustomer, setLoadedCustomer] = useState([]);
+const phonebook = useCallback(() => {
+  axios.get( `http://localhost:5000/api/customers`)  
+			    .then(response => {
+				//Control Response
+        //  console.log(response.data.customer)
+          if(response.data.customer===false){
+            swal.fire("Invalid Request",)
+					
+				}else{
+			
+                setLoadedCustomer(response.data.customer) 
+                console.log(response.data.customer)
+            }
+      })
+}, []);
+
+//phonebook()
 
 return (
         <div className="container-fluid">
@@ -63,7 +86,7 @@ return (
           <div className="card-body pl-3" id="clientlist">
             <CustomerSearchForm validator={[VALIDATOR_REQUIRE()]}  />
 
-              <CustomerList  items={USERS}/>
+              <CustomerList  items={loadedCustomer}/>
           </div>
         </div>
           </div>
