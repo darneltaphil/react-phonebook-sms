@@ -1,4 +1,4 @@
-import React, {useState, useCallback } from "react"
+import React, {useState, useEffect } from "react"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
 import {  faPlus, faSms, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
 import Modal from 'react-bootstrap/Modal'
@@ -26,8 +26,11 @@ const [smsModal, setSmsModal]= useState(false);
 const handleSmsModalClose = () => setSmsModal(false);
 const handleSmsModalShow = () => setSmsModal(true);
 
-const [loadedCustomer, setLoadedCustomer] = useState([]);
-const phonebook = useCallback(() => {
+ const [send, setSend] = useState([]);
+
+
+
+const phonebook = () => {
   axios.get( `http://localhost:5000/api/customers`)  
 			    .then(response => {
 				//Control Response
@@ -37,13 +40,16 @@ const phonebook = useCallback(() => {
 					
 				}else{
 			
-                setLoadedCustomer(response.data.customer) 
+                setSend(response.data.customer) 
                 console.log(response.data.customer)
+                // const send = response.data.customer;
             }
       })
-}, []);
+};
 
-//phonebook()
+useEffect(() => {
+  phonebook()
+}, [])
 
 return (
         <div className="container-fluid">
@@ -86,7 +92,7 @@ return (
           <div className="card-body pl-3" id="clientlist">
             <CustomerSearchForm validator={[VALIDATOR_REQUIRE()]}  />
 
-              <CustomerList  items={loadedCustomer}/>
+              <CustomerList  items={send}/>
           </div>
         </div>
           </div>
