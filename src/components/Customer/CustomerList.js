@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import CustomerItem from "./CustomerItem"
 import Accordion from 'react-bootstrap/Accordion'
+import Spinner from 'react-bootstrap/Spinner'
 
 const CustomerList = props => {
    const receivedItems = props.items
@@ -8,17 +9,17 @@ const CustomerList = props => {
 
         return(
             <div className="">
-                <h2> No Customer Found</h2>
+                <center> <Spinner animation="grow" /><br/> Loading</center>
             </div>
         );
     }
 return(
     <>
     {receivedItems.map(customer =>(
-            <Accordion  >
+    <Accordion  >
         <CustomerItem 
             key={customer.id}
-            id={customer.id}
+            id={customer._id}
             image={customer.image}
             name={customer.name}
             mobile={customer.mobile}
@@ -26,9 +27,8 @@ return(
             address={customer.address}
             gps={customer.gps}
             email={customer.email}
-
              />
-             </Accordion>
+    </Accordion>
     )
     )}
     </>

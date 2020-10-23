@@ -11,12 +11,6 @@ import swal from "sweetalert2"
 import axios from "axios"
 
 const Customer = () => {
-    //Static Customer List
-const USERS = [
-    {id: Math.random() , name:"Arnold Kofi", mobile:"0200111391", email :"darneltaphil@gmail.com", address:"Off Ashiyie Road", city:"Accra", gps:"GD-143-9857", image:"https://via.placeholder.com/25" },
-    {id: Math.random() ,name:"Gifty Mensah Kafui", mobile:"0541265854", email :"darneltaphil@gmail.com", address:"Off Ashiyie Road", city:"Accra", gps:"GD-143-9857", image:"https://via.placeholder.com/25" },
-]
-
     //handle Modal Show/Close
 const [show, setShow] = useState(false);
 const handleCustomerModalClose = () => setShow(false);
@@ -26,23 +20,15 @@ const [smsModal, setSmsModal]= useState(false);
 const handleSmsModalClose = () => setSmsModal(false);
 const handleSmsModalShow = () => setSmsModal(true);
 
- const [send, setSend] = useState([]);
-
-
+const [send, setSend] = useState([]);
 
 const phonebook = () => {
   axios.get( `http://localhost:5000/api/customers`)  
 			    .then(response => {
-				//Control Response
-        //  console.log(response.data.customer)
-          if(response.data.customer===false){
-            swal.fire("Invalid Request",)
-					
+          if(response.data.customer === false){
+            swal.fire("Customer database could not be reached",)
 				}else{
-			
                 setSend(response.data.customer) 
-                console.log(response.data.customer)
-                // const send = response.data.customer;
             }
       })
 };
@@ -73,29 +59,29 @@ return (
                   <span className="text">Send SMS to all</span>
                 </div>
 
-                <div id="refreshlist" className="btn btn-warning btn-icon-split mx-2 ">
+                {/* <div id="refreshlist" className="btn btn-warning btn-icon-split mx-2 ">
                   <span className="icon text-white-50">
                   <FontAwesomeIcon icon={faSyncAlt} />
                   </span>
                   <span className="text">Refresh List</span>
-                </div>
+                </div> */}
                    </div> 
           </div>
 
 
         {/*Content Row*/}
-        <div className="row">
+       <div className="row">
         <div className="card shadow mb-4 col-lg py-0 px-0">
           <div className="card-header py-3 d-flex flex-row  justify-content-between ">
             <h6 className="m-0 font-weight-bold text-primary">Manage Customers</h6>
           </div>
           <div className="card-body pl-3" id="clientlist">
-            <CustomerSearchForm validator={[VALIDATOR_REQUIRE()]}  />
+              <CustomerSearchForm validator={[VALIDATOR_REQUIRE()]}  />
 
               <CustomerList  items={send}/>
           </div>
         </div>
-          </div>
+      </div>
 
 
         <Modal
@@ -111,16 +97,6 @@ return (
                 <Modal.Body>
                 <CustomerForm />
                 </Modal.Body>
-                
-                <Modal.Footer>
-                    <div className="btn btn-dark"  onClick={handleCustomerModalClose}>
-                        Close
-                    </div>
-                    {/* <div className="btn btn-primary"> 
-                        <FontAwesomeIcon icon={faSave} />
-                        Save
-                    </div> */}
-                </Modal.Footer>
       </Modal>
 
 
@@ -135,14 +111,9 @@ return (
                 </Modal.Header>
 
                 <Modal.Body>
-                <SmsForm to="all" />
+                <SmsForm to="all"  />
                 </Modal.Body>
                 
-                <Modal.Footer>
-                    <div className="btn btn-dark"  onClick={handleSmsModalClose}>
-                        Close
-                    </div>
-                </Modal.Footer>
       </Modal>
       </div>
 

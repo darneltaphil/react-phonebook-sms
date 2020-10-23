@@ -34,9 +34,9 @@ let routes ;
 
         routes = (
         <Switch>
-          <Route path="/dashboard" exact>
+          {/* <Route path="/dashboard" exact>
             <Dashboard/>
-          </Route>
+          </Route> */}
           <Route path="/Customer" exact >
             <Customer />
           </Route>
@@ -46,7 +46,7 @@ let routes ;
           <Route path="/settings" exact>
             <Settings/>
           </Route> 
-          <Redirect to="/dashboard" /> 
+          <Redirect to="/Customer" /> 
       </Switch> );
 
   return (
@@ -57,7 +57,8 @@ let routes ;
     <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login : login , logout: logout }} >
       
       {auth.isLoggedIn && (
-      <div id="page-top" > <Router >
+      <div id="page-top" > 
+      <Router >
         <Sidebar /> 
        <div id="wrapper">
   

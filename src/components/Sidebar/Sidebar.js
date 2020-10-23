@@ -18,7 +18,7 @@ const Sidebar = () => {
 
         <Navbar.Collapse className=" text-white  " id="responsive-navbar-nav" >
             <Nav className="mr-auto text-white">
-                <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faTachometerAlt} name="Dashboard" link="/dashboard"  /></Nav.Link>
+                {/* <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faTachometerAlt} name="Dashboard" link="/dashboard"  /></Nav.Link> */}
                 <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faUser} name="Customer" link="/customer"  /></Nav.Link>
                 <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faSms} name="Send SMS"  link="/sms" /></Nav.Link>
                 <Nav.Link className=" text-white pr-3 "><SidebarMenuItem icon={faSlidersH} name="Settings" link="/settings"  /></Nav.Link>

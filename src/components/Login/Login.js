@@ -15,8 +15,8 @@ const Login = () => {
 
  const authSubmitHandler = e => {
   e.preventDefault();
+  
    auth.login();   
-   console.log(auth.login()) 
  }
 
     return( 

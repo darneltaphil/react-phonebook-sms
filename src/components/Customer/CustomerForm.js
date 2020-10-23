@@ -1,11 +1,45 @@
-
 import React from "react"
 import Image from 'react-bootstrap/Image'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
+import Swal from 'sweetalert2'
+let baseUrl = "http://localhost:5000/api/customers/"
 const CustomerForm = () => {
-    return (<form>
+
+  const handleSubmit = (e) =>{
+    e.preventDefault();
+    const data = {
+      name : e.target[0].value,
+      mobile : e.target[1].value,
+      email : e.target[2].value,
+      address : e.target[3].value,
+      city : e.target[4].value,
+      gps : e.target[5].value,
+    }
+    console.log(data)
+      try{
+        fetch("http://localhost:5000/api/customers/", {
+        method: "POST",
+        headers : {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+      .then( response =>{
+        if(response){
+           Swal.fire({
+            type: "success",
+            timer: 2000,
+            text: response.msg})
+        }
+    })
+      }catch(error){
+
+      }
+  }
+
+    return (<form onSubmit={handleSubmit} method="POST" enctype='application/json'>
         <div className="form-row">
           <div className="form-group col-md-12">
             <center> <div className="round-50 flex">
@@ -16,7 +50,8 @@ const CustomerForm = () => {
                 </Col>
             </Row>
             </Container>                 
-            </div></center>
+            </div>
+            </center>
           </div>
         </div>
         <hr className="sidebar-divider mb-5"/> 
@@ -38,7 +73,7 @@ const CustomerForm = () => {
         <div className="form-row">
           <div className="form-group col-md-12">
             {/* <label for="inputEmail">Email</label> */}
-            <input name="" type="email" className="form-control" id="inputEmail" placeholder="Email"/>
+            <input name="email" type="email" className="form-control" id="inputEmail" placeholder="Email"/>
           </div>
         </div>
         
@@ -55,7 +90,7 @@ const CustomerForm = () => {
         
           <div className="form-group col-md-6">
             {/* <label for="inputGPS">GhanaPost GPS</label> */}
-            <input name="ghanapostgps" type="text" className="form-control" id="inputGPS" placeholder="GhanaPost GPS"/>
+            <input name="gps" type="text" className="form-control" id="inputGPS" placeholder="GhanaPost GPS"/>
           </div>
         </div>
         <button type="submit" className="btn btn-primary">Add</button>
