@@ -1,12 +1,14 @@
-import React from "react"
+import React ,{ useState }from "react"
 import Image from 'react-bootstrap/Image'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Swal from 'sweetalert2'
-let baseUrl = "http://localhost:5000/api/customers/"
+let baseUrl = "http://localhost:4000/api/customers/"
 const CustomerForm = () => {
-
+  const [show, setShow] = useState(false);
+  const handleCustomerModalClose = () => setShow(false);
+  
   const handleSubmit = (e) =>{
     e.preventDefault();
     const data = {
@@ -17,9 +19,9 @@ const CustomerForm = () => {
       city : e.target[4].value,
       gps : e.target[5].value,
     }
-    console.log(data)
-      try{
-        fetch("http://localhost:5000/api/customers/", {
+
+    try{
+        fetch(baseUrl, {
         method: "POST",
         headers : {
           'Content-Type': 'application/json'
@@ -27,11 +29,14 @@ const CustomerForm = () => {
         body: JSON.stringify(data)
       })
       .then( response =>{
-        if(response){
+        if(response.status){
            Swal.fire({
             type: "success",
             timer: 2000,
-            text: response.msg})
+            text: "Contact Saved"})
+
+            handleCustomerModalClose()
+            window.location.href= '/customer'
         }
     })
       }catch(error){
@@ -46,7 +51,7 @@ const CustomerForm = () => {
           <Container>
             <Row>
                 <Col xs={12} md={12}>
-                <Image src="https://via.placeholder.com/100" roundedCircle  />
+                <Image src="https://via.placeholder.com/60" roundedCircle  />
                 </Col>
             </Row>
             </Container>                 

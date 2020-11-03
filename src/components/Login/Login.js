@@ -1,29 +1,55 @@
 import React, {useState, useContext} from "react"
 import { Link } from "react-router-dom"
+import Swal from "sweetalert2"
 import {
    VALIDATOR_EMAIL,
     VALIDATOR_MIN 
   } from "../Utils/Validators"
   import {AuthContext} from "../Shared/context/auth-context"
-
+  import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+  import {  faSign, faSms, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
+    
 const Login = () => {
+  
+  const baseURL = "http://localhost:4000/api/user/login"
+
   const auth= useContext(AuthContext);
 
   const [email , setEmail ]= useState('')
   const [password, setPassword] = useState('')
 
-
+  const data = {
+    email : email,
+    password : password,
+  }
+ 
  const authSubmitHandler = e => {
   e.preventDefault();
-  
-   auth.login();   
+  try{
+    fetch('http://localhost:4000/api/user/login', {
+    method: "POST",
+    headers : {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(data)
+  })
+  .then( response =>{
+    if(response){
+         auth.login();   
+
+
+    }
+})  
+  }catch(error){
+
+  }
  }
 
     return( 
 
-<div className="bg-gradient-primary">
+<div className="">
 
-  <div className="container">
+
 
     <div className="row justify-content-center">
 
@@ -36,25 +62,27 @@ const Login = () => {
               <div className="col-lg-6">
                 <div className="p-5">
                   <div className="text-center">
-                    <h1 className="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                    <h1 className="h4 text-gray-900 mb-4 display-4">Safe Login </h1>
                   </div>
                   <form className="user" onSubmit={authSubmitHandler}>
                     <div className="form-group">
                       <input 
+                      onChange={e =>{setEmail(e.target.value)}}
                       type="email" 
                       className="form-control form-control-user" 
                       id="exampleInputEmail" 
                       aria-describedby="emailHelp" 
                       placeholder="Enter Email Address..."
-                      validators={[VALIDATOR_EMAIL()]} />
+                      validators={[VALIDATOR_EMAIL()]} required />
                     </div>
                     <div className="form-group">
                       <input 
+                      onChange={e =>{setPassword(e.target.value)}}
                       type="password"
                        className="form-control form-control-user" 
                        id="exampleInputPassword" 
                        placeholder="Password"
-                       validators={[VALIDATOR_EMAIL()]} />
+                       validators={[VALIDATOR_EMAIL()]}  required/>
                     </div>
                     <div className="form-group">
                       <div className="custom-control custom-checkbox small">
@@ -66,19 +94,19 @@ const Login = () => {
                       </div>
                     </div>
                     <button type="submit"  className="btn btn-primary btn-user btn-block">
-                      Login
+                     <FontAwesomeIcon icon={faSign}/> Login
                     </button>
-                    <hr/>
+                    {/* <hr/>
                     <a href="index.html" className="btn btn-google btn-user btn-block">
                       <i className="fab fa-google fa-fw"></i> Login with Google
-                    </a>
+                    </a> */}
                   </form>
                   <hr/>
                   <div className="text-center">
-                    <a className="small" href="forgot-password.html">Forgot Password?</a>
+                    <span className="small" >Forgot Password?</span>
                   </div>
                   <div className="text-center">
-                    <Link to="/signup" className="small" href="register.html">Create an Account!</Link>
+                    <Link to="/signup" className="small">Create an Account!</Link>
                   </div>
                 </div>
               </div>
@@ -91,7 +119,6 @@ const Login = () => {
     </div>
 
   </div>
-</div>
 
 
     )

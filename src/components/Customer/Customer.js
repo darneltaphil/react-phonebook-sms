@@ -23,12 +23,12 @@ const handleSmsModalShow = () => setSmsModal(true);
 const [send, setSend] = useState([]);
 
 const phonebook = () => {
-  axios.get( `http://localhost:5000/api/customers`)  
+  axios.get( `http://localhost:4000/api/customers`)  
 			    .then(response => {
-          if(response.data.customer === false){
+          if(response.data.customers === false){
             swal.fire("Customer database could not be reached",)
 				}else{
-                setSend(response.data.customer) 
+                setSend(response.data.customers) 
             }
       })
 };
@@ -75,7 +75,7 @@ return (
           <div className="card-header py-3 d-flex flex-row  justify-content-between ">
             <h6 className="m-0 font-weight-bold text-primary">Manage Customers</h6>
           </div>
-          <div className="card-body pl-3" id="clientlist">
+          <div className="card-body pl-3" >
               <CustomerSearchForm validator={[VALIDATOR_REQUIRE()]}  />
 
               <CustomerList  items={send}/>

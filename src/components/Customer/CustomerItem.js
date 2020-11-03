@@ -20,15 +20,15 @@ const CustomerItem = props => {
   const handleDelete = (e) =>{
     const customerId = e.target.id
     console.log(customerId);
-    swal.clickConfirm({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this imaginary file!",
+    swal.fire({
+      title: "Delete Contact?",
+      text: "Once deleted, you will not be able to recover this contact!",
       icon: "warning",
       buttons: true,
       dangerMode: true,
     })
     .then((willDelete) => {
-      fetch('http://localhost:5000/api/customers/delete/'+customerId, {
+      fetch('http://localhost:4000/api/customers/delete/'+customerId, {
         method: "DELETE",
         headers : {
           'Content-Type': 'application/json'
@@ -37,15 +37,15 @@ const CustomerItem = props => {
       })
       
       .then( response =>{
-        const msg= response.data.msg
+        const msg= response.msg
       })
-      if (willDelete) {
-        swal.fire("Poof! Your imaginary file has been deleted!", {
-          icon: "success",
-        });
-      } else {
-        swal.fire("Your imaginary file is safe!");
-      }
+      // if (willDelete) {
+      //   swal.fire("Poof! Your imaginary file has been deleted!", {
+      //     icon: "success",
+      //   });
+      // } else {
+      //   swal.fire("Your imaginary file is safe!");
+      // }
     });
     
   }
@@ -74,10 +74,18 @@ const CustomerItem = props => {
 
     <Accordion.Collapse eventKey={props.id}>
       <Card.Body>
-            <div><strong> Mobile: </strong>0{props.mobile} </div>
-            <div><strong> Email:</strong> {props.email} </div>
-            <div><strong> Address:</strong> {props.address}, {props.city} </div>
-            <div><strong> GhanaPostGps: </strong>{props.gps} </div>
+            <div><strong> Mobile: </strong>{props.mobile} </div>
+            {props.email 
+            ?<div><strong> Email:</strong> {props.email} </div>
+            :""}
+            {props.address||props.city 
+              ?<div><strong> Address:</strong> {props.address}, {props.city} </div>
+              :""
+            }
+            {props.gps
+              ?<div><strong> GhanaPostGps: </strong>{props.gps} </div> 
+              : "" 
+            }
             <ButtonGroup aria-label="Basic example" className="d-flex d-none d-sm-block"  >
                 {/* <Button variant="primary"id={props.mobile} title="Call"   > 
                   

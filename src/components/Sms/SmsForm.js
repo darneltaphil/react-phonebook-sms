@@ -16,7 +16,7 @@ const SmsForm = props => {
       // console.log('me')
       //console.log(e.target[1].value)
       try{
-        fetch("http://localhost:5000/api/send-sms/", {
+        fetch("http://localhost:4000/api/send-sms/", {
         method: "POST",
         headers : {
           'Content-Type': 'application/json'

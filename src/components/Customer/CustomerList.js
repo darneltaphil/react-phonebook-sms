@@ -9,7 +9,7 @@ const CustomerList = props => {
 
         return(
             <div className="">
-                <center> <Spinner animation="grow" /><br/> Loading</center>
+                <center> <Spinner animation="grow" className="display-4" /><br/> Loading</center>
             </div>
         );
     }

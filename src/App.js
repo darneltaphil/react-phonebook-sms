@@ -3,21 +3,22 @@ import {
   BrowserRouter as Router , 
   Route, 
   Redirect, 
-  Switch 
+  Switch, 
+  BrowserRouter
 } from "react-router-dom"
 
 import Dashboard from "./components/Dashboard/Dashboard"
 import Customer from "./components/Customer/Customer"
 import Sms from "./components/Sms/Sms"
 import Login from "./components/Login/Login"
-import Sidebar from "./components/Sidebar/Sidebar"
+import Navigation from "./components/Navigation/Navigation"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./components/Shared/sb-admin-2.css";  
 import Settings from './components/Settings/Settings';
 import {AuthContext} from "./components/Shared/context/auth-context"
 
 const  App = () =>  {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -31,56 +32,55 @@ const auth= useContext(AuthContext);
 
 let routes ; 
 
-
-        routes = (
-        <Switch>
-          {/* <Route path="/dashboard" exact>
-            <Dashboard/>
-          </Route> */}
-          <Route path="/Customer" exact >
-            <Customer />
-          </Route>
-          <Route path="/sms" exact>
-            <Sms/>
-          </Route>
-          <Route path="/settings" exact>
-            <Settings/>
-          </Route> 
-          <Redirect to="/Customer" /> 
-      </Switch> );
-
+if(isLoggedIn){
+  routes = (
+     <React.Fragment>
+     <Navigation /> 
+       <Route path="/Customer" exact >
+        <Customer />
+      </Route>
+      <Route path="/sms" exact>
+        <Sms/>
+      </Route>
+      <Route path="/settings" exact>
+        <Settings/>
+      </Route> 
+      <Redirect to="/Customer" /> 
+     </React.Fragment>  
+  );
+}else{
+  routes = (
+    <React.Fragment>
+      <Route path="/login" exact >
+       <Login />
+     </Route>
+     <Redirect to="/login" /> 
+    </React.Fragment>  
+  );
+}
+        
   return (
 
-    
-      
       
     <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login : login , logout: logout }} >
-      
-      {auth.isLoggedIn && (
-      <div id="page-top" > 
+      <BrowserRouter>
+      <Switch>
+      {/* {auth.isLoggedIn && ( */}
       <Router >
-        <Sidebar /> 
-       <div id="wrapper">
+       {/* <div id="wrapper"> */}
   
-            <div id="content-wrapper" className="d-flex flex-column">
-                <div id="content container">
+            {/* <div id="content-wrapper" className="d-flex flex-column"> */}
+                {/* <div id="content container"> */}
                 {routes}
-                </div>
-            </div>
+                {/* </div> */}
+            {/* </div> */}
             
-        </div> 
+        {/* </div>  */}
         </Router>
-        </div>
-        )}
+        {/* )} */}
 
-        {!auth.isLoggedIn && (
-
-          <Router path="/login" exact>
-               <Login/>
-          </Router>
-        ) }  
-        
-     
+                </Switch>
+         </BrowserRouter>
   </AuthContext.Provider>
   
   );
