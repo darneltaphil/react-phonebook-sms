@@ -11,6 +11,7 @@ import {
 import Customer from "./components/Customer/Customer"
 import Sms from "./components/Sms/Sms"
 import Login from "./components/Login/Login"
+import Signup from "./components/Signup/Signup"
 import Navigation from "./components/Navigation/Navigation"
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./components/Shared/sb-admin-2.css";  
@@ -18,7 +19,7 @@ import Settings from './components/Settings/Settings';
 import {AuthContext} from "./components/Shared/context/auth-context"
 
 const  App = () =>  {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -53,6 +54,9 @@ if(isLoggedIn){
     <React.Fragment>
       <Route path="/login" exact >
        <Login />
+     </Route>
+      <Route path="/signup" exact >
+       <Signup />
      </Route>
      <Redirect to="/login" /> 
     </React.Fragment>  

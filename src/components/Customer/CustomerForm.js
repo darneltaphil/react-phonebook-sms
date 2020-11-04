@@ -18,6 +18,7 @@ const CustomerForm = () => {
       address : e.target[3].value,
       city : e.target[4].value,
       gps : e.target[5].value,
+      creator: "5fa189e32516a81f48488d0f"
     }
 
     try{
@@ -35,7 +36,7 @@ const CustomerForm = () => {
             timer: 2000,
             text: "Contact Saved"})
 
-            window.location.href= '/customer'
+           
         }
     })
       }catch(error){
