@@ -1,17 +1,15 @@
 import React, {useState, useContext} from "react"
 import { Link } from "react-router-dom"
-import Swal from "sweetalert2"
 import {
    VALIDATOR_EMAIL,
-    VALIDATOR_MIN 
   } from "../Utils/Validators"
   import {AuthContext} from "../Shared/context/auth-context"
   import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-  import {  faSign, faSms, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
+  import {  faSign} from "@fortawesome/free-solid-svg-icons"
     
 const Login = () => {
   
-  const baseURL = "http://localhost:4000/api/user/login"
+  let  baseURL = "http://localhost:4000/api/user/login"
 
   const auth= useContext(AuthContext);
 
@@ -26,7 +24,7 @@ const Login = () => {
  const authSubmitHandler = e => {
   e.preventDefault();
   try{
-    fetch('http://localhost:4000/api/user/login', {
+    fetch(baseURL, {
     method: "POST",
     headers : {
       'Content-Type': 'application/json'

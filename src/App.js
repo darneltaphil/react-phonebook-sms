@@ -1,4 +1,4 @@
-import React, {useState, useCallback, useContext} from 'react';
+import React, {useState, useCallback} from 'react';
 import { 
   BrowserRouter as Router , 
   Route, 
@@ -7,7 +7,7 @@ import {
   BrowserRouter
 } from "react-router-dom"
 
-import Dashboard from "./components/Dashboard/Dashboard"
+// import Dashboard from "./components/Dashboard/Dashboard"
 import Customer from "./components/Customer/Customer"
 import Sms from "./components/Sms/Sms"
 import Login from "./components/Login/Login"
@@ -28,7 +28,7 @@ const  App = () =>  {
     setIsLoggedIn(false);
   }, [])
 
-const auth= useContext(AuthContext);
+//const auth= useContext(AuthContext);
 
 let routes ; 
 

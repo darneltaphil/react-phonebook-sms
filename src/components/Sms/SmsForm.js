@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import { faTimes, faUser } from "@fortawesome/free-solid-svg-icons"
+import {  faUser } from "@fortawesome/free-solid-svg-icons"
 import FormLabel from "react-bootstrap/esm/FormLabel";
 import Swal from "sweetalert2"
 const SmsForm = props => {

@@ -1,4 +1,4 @@
-import React, { useState, useRef }from "react";
+import React, { useState }from "react";
 import {Link} from "react-router-dom";
 import CustomerAvatar from "./CustomerAvatar";
 import Accordion from 'react-bootstrap/Accordion';
@@ -6,10 +6,9 @@ import Card from 'react-bootstrap/Card';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSms, faMobileAlt, faEdit, faTrashAlt, faCopy } from "@fortawesome/free-solid-svg-icons";
+import { faSms, faPhone, faEdit, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import Modal from 'react-bootstrap/Modal';
 import SmsForm from "../Sms/SmsForm";
-import axios from 'axios';
 import swal from 'sweetalert2'
 
 
@@ -37,7 +36,7 @@ const CustomerItem = props => {
       })
       
       .then( response =>{
-        const msg= response.msg
+        
       })
       // if (willDelete) {
       //   swal.fire("Poof! Your imaginary file has been deleted!", {
@@ -87,14 +86,13 @@ const CustomerItem = props => {
               : "" 
             }
             <ButtonGroup aria-label="Basic example" className="d-flex d-none d-sm-block"  >
-                {/* <Button variant="primary"id={props.mobile} title="Call"   > 
-                  
-                    <FontAwesomeIcon icon={faMobileAlt} /> 
-                  
-                  </Button> */}
-                <Button variant="success" id={props.mobile} title="Send SMs" onClick={handleSmsModalShow}> <FontAwesomeIcon icon={faSms}/>
+                <Button variant="primary"id={props.mobile} title="Call"   > 
+                    <FontAwesomeIcon icon={faPhone} /> 
                 </Button>
-                <Button variant="primary" id={props.id} title="Edit Contact" ><FontAwesomeIcon icon={faEdit} /> </Button>
+                <Button variant="success" id={props.mobile} title="Send SMs" onClick={handleSmsModalShow}>        
+                  <FontAwesomeIcon icon={faSms}/>
+                </Button>
+                <Button variant="dark" id={props.id} title="Edit Contact" ><FontAwesomeIcon icon={faEdit} /> </Button>
                 {/* <Button variant="warning" id={props.mobile} title="Copy Number" onClick={copyToClipboard} ><FontAwesomeIcon icon={faCopy} /> </Button> */}
                 <Button variant="danger" title="Delete Contact" id={props.id} onClick={handleDelete} ><FontAwesomeIcon icon={faTrashAlt} /> </Button>
             </ButtonGroup>

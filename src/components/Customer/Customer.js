@@ -1,6 +1,6 @@
 import React, {useState, useEffect } from "react"
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-import {  faPlus, faSms, faSyncAlt } from "@fortawesome/free-solid-svg-icons"
+import {  faPlus, faSms } from "@fortawesome/free-solid-svg-icons"
 import Modal from 'react-bootstrap/Modal'
 import CustomerForm from "./CustomerForm"
 import CustomerSearchForm from "./CustomerSearchForm"
@@ -46,13 +46,13 @@ return (
         {/*Tabed Menu Row*/}
            <div className="row">
               <div className="col-lg-12 col-md-12 col-sd-12 mb-3">
-                  <div onClick={handleCustomerModalShow} id="AddNewClient" className="btn btn-primary btn-icon-split mx-2" data-toggle="modal" data-target="#AddNewClient_modal" data-backdrop="static" data-keyboard="false" >
+                  <div onClick={handleCustomerModalShow} id="AddNewClient" className="btn btn-primary btn-icon-split mx-2 mb-3" data-toggle="modal" data-target="#AddNewClient_modal" data-backdrop="static" data-keyboard="false" >
                   <span className="icon text-white-50">
                   <FontAwesomeIcon icon={faPlus} />
                   </span>
                   <span className="text">New Customer</span>
                 </div>
-                <div onClick={handleSmsModalShow}  id="sms_to_all" className="btn btn-success btn-icon-split mx-2">
+                <div onClick={handleSmsModalShow}  id="sms_to_all" className="btn btn-success btn-icon-split mx-2 mb-3">
                   <span className="icon text-white-50">
                   <FontAwesomeIcon icon={faSms} />
                   </span>

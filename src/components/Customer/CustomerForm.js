@@ -1,4 +1,4 @@
-import React ,{ useState }from "react"
+import React from "react"
 import Image from 'react-bootstrap/Image'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -6,8 +6,8 @@ import Container from 'react-bootstrap/Container'
 import Swal from 'sweetalert2'
 let baseUrl = "http://localhost:4000/api/customers/"
 const CustomerForm = () => {
-  const [show, setShow] = useState(false);
-  const handleCustomerModalClose = () => setShow(false);
+  // const [show, setShow] = useState(false);
+  // const handleCustomerModalClose = () => setShow(false);
   
   const handleSubmit = (e) =>{
     e.preventDefault();
@@ -35,7 +35,6 @@ const CustomerForm = () => {
             timer: 2000,
             text: "Contact Saved"})
 
-            handleCustomerModalClose()
             window.location.href= '/customer'
         }
     })
@@ -44,7 +43,8 @@ const CustomerForm = () => {
       }
   }
 
-    return (<form onSubmit={handleSubmit} method="POST" enctype='application/json'>
+    return (
+    <form onSubmit={handleSubmit}>
         <div className="form-row">
           <div className="form-group col-md-12">
             <center> <div className="round-50 flex">

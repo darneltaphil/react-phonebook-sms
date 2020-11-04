@@ -45,7 +45,7 @@ const Sms = () => {
               <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 className="m-0 font-weight-bold text-primary">Pre-Composed SMS</h6>
                 <div className="dropdown no-arrow">
-                  <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a className="dropdown-toggle" href="/" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <FontAwesomeIcon icon={faEllipsisV} />
                   </a>
                   </div>
@@ -62,7 +62,7 @@ const Sms = () => {
               <div className="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 className="m-0 font-weight-bold text-primary">Compose     </h6>
                 <div className="dropdown no-arrow">
-                  <a className="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a className="dropdown-toggle" href="/" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   <FontAwesomeIcon icon={faEllipsisV} />
                 <i className="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
                   </a>
