@@ -35,7 +35,7 @@ import {
  const signupHandler = async e => {
   e.preventDefault();
   if(confirm !== password){
-    
+
   }
   try{
     setIsLoading(true);
@@ -53,11 +53,7 @@ import {
       }
             setIsLoading(true);
             auth.login()
-              // .then( response =>{
-              //     if(response){
-              //         auth.logout();   
-              //     }
-              //   })   
+ 
   }catch(error){
     setIsLoading(false);
     setError(error.message || 'Something went wring, please try again');
