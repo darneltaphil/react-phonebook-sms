@@ -8,7 +8,8 @@ let baseUrl = "http://localhost:4000/api/customers/"
 const CustomerForm = () => {
   // const [show, setShow] = useState(false);
   // const handleCustomerModalClose = () => setShow(false);
-  
+  let uid= localStorage.getItem('currentUserId')
+
   const handleSubmit = (e) =>{
     e.preventDefault();
     const data = {
@@ -18,7 +19,7 @@ const CustomerForm = () => {
       address : e.target[3].value,
       city : e.target[4].value,
       gps : e.target[5].value,
-      creator: "5fa189e32516a81f48488d0f"
+      creator: uid
     }
 
     try{
