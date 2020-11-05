@@ -20,9 +20,7 @@ import {
   const [email , setEmail ]= useState('')
   const [password, setPassword] = useState('')
   const [confirm, setConfirm] = useState('')
-  const [loginButton, setLoginButton] = useState ( ()=> {
-    
-  })
+
 
   const data = { 
     name: fullname,
@@ -51,13 +49,14 @@ import {
         setIsLoading(false);
         return new Error (responseData.message)
       }
-            setIsLoading(true);
+            localStorage.setItem('currentUserId', responseData.userid)
             auth.login()
  
   }catch(error){
     setIsLoading(false);
     setError(error.message || 'Something went wring, please try again');
   }
+  
  } 
 
 

@@ -22,15 +22,24 @@ const handleSmsModalShow = () => setSmsModal(true);
 
 const [send, setSend] = useState([]);
 
-const phonebook = () => {
-  axios.get( `http://localhost:4000/api/customers`)  
-			    .then(response => {
-          if(response.data.customers === false){
-            swal.fire("Customer database could not be reached",)
-				}else{
-                setSend(response.data.customers) 
-            }
-      })
+const phonebook = async () => {
+
+ const uid= localStorage.getItem('currentUserId')
+
+ try { 
+   const responseData = await axios.get('http://localhost:4000/api/customers/'+uid)
+                        .then(response => {
+                          console.log(response)
+                                  if(response.data.customers === false){
+                                    swal.fire("Customer database could not be reached",)
+                                }else{
+                                        setSend(response.data.customers) 
+                                    }
+                                  })
+
+ }catch(error){
+
+ }
 };
 
 useEffect(() => {
@@ -40,9 +49,9 @@ useEffect(() => {
 return (
         <div className="container-fluid">
 
-        <h1 className="h3 mb-2 text-gray-800">Customer List</h1>
+        <h1 className="h3 mb-2 text-gray-800">Contact List</h1>
           
-        <p className="mb-4">View your clients details, Edit their information and Engage them.</p>
+        <p className="mb-4">View your Contact details, Edit their information and Engage them.</p>
         {/*Tabed Menu Row*/}
            <div className="row">
               <div className="col-lg-12 col-md-12 col-sd-12 mb-3">

@@ -36,12 +36,12 @@ const Login = () => {
           
     const responseData = await response.json()
     
-    console.log(responseData)
+   // console.log(responseData)
     if(!response.ok){
       setIsLoading(false);
       return new Error (responseData.message)
     }
-    
+    localStorage.setItem('currentUserId', responseData.userid)
     auth.login()
  
  }catch(error){
