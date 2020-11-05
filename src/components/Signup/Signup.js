@@ -5,7 +5,6 @@ import {
    VALIDATOR_MAXLENGTH
   } from "../Utils/Validators"
   import {AuthContext} from "../Shared/context/auth-context"
-  import {  } from "@fortawesome/free-solid-svg-icons"
   import Spinner from 'react-bootstrap/Spinner'
 
   const Login = () => {
@@ -35,6 +34,9 @@ import {
  
  const signupHandler = async e => {
   e.preventDefault();
+  if(confirm !== password){
+    
+  }
   try{
     setIsLoading(true);
       const response =await fetch(baseURL, {
@@ -45,8 +47,7 @@ import {
             
       const responseData = await response.json()
       
-      console.log(response)
-      if(!response.ok){
+     if(!response.ok){
         setIsLoading(false);
         return new Error (responseData.message)
       }
@@ -134,14 +135,10 @@ import {
                     <div className="form-group">
                     </div>
                     {isLoading && <center> <Spinner animation="border" variant="info" /></center>}
-                    {error}
+                    
                     <button type="submit"  className="mt-3 btn btn-info btn-user btn-block" >
                       Sign up
                     </button>
-                    {/* <hr/>
-                    <a  className="btn btn-google btn-user btn-block">
-                      <i className="fab fa-google fa-fw"></i> Sign up with Google
-                    </a> */}
                   </form>
                   <hr/>
                   <div className="text-center">

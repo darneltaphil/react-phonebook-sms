@@ -3,15 +3,18 @@ import { Link } from "react-router-dom"
 import {
    VALIDATOR_EMAIL,
   } from "../Utils/Validators"
-  import { AuthContext } from "../Shared/context/auth-context"
-  import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-  import { faSign } from "@fortawesome/free-solid-svg-icons"
-  import alertify from "alertifyjs";
+import { AuthContext } from "../Shared/context/auth-context"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSign } from "@fortawesome/free-solid-svg-icons"
+
 const Login = () => {
-  const auth= useContext(AuthContext);
 
   let  baseURL = "http://localhost:4000/api/user/login"
 
+  const auth= useContext(AuthContext);
+
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState()
   const [email , setEmail ]= useState('')
   const [password, setPassword] = useState('')
 
@@ -23,21 +26,26 @@ const Login = () => {
  const authSubmitHandler =async  e => {
   e.preventDefault();
   try{
-    fetch(baseURL, {
-      method: "POST",
-      headers : {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-  })
-  .then( response =>{
-    if(response){
-         auth.login();   
+    setIsLoading(true);
+    const response =await fetch(baseURL, {
+                method: "POST",
+                headers : {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+          })  
+          
+    const responseData = await response.json()
+    
+    console.log(response)
+    if(!response.ok){
+      setIsLoading(false);
+      return new Error (responseData.message)
     }
-})  
-  }catch(error){
-
-  }
+          auth.login()
+ 
+ }catch(error){
+  setIsLoading(false);
+  setError(error.message || 'Something went wring, please try again');
+}
  }
 
     return( 
@@ -74,7 +82,7 @@ const Login = () => {
                        id="exampleInputPassword" 
                        placeholder="Password"
                        validators={[VALIDATOR_EMAIL()]}  required
-                       onClick={()=>{ alertify.success('Success message');}} />
+                        />
                     </div>
                     <div className="form-group">
                       <div className="custom-control custom-checkbox small">
