@@ -5,7 +5,8 @@ import {
   } from "../Utils/Validators"
 import { AuthContext } from "../Shared/context/auth-context"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faSign } from "@fortawesome/free-solid-svg-icons"
+import {  faSignInAlt } from "@fortawesome/free-solid-svg-icons"
+import Spinner from "react-bootstrap/esm/Spinner"
 
 const Login = () => {
 
@@ -35,12 +36,13 @@ const Login = () => {
           
     const responseData = await response.json()
     
-    console.log(response)
+    console.log(responseData)
     if(!response.ok){
       setIsLoading(false);
       return new Error (responseData.message)
     }
-          auth.login()
+    
+    auth.login()
  
  }catch(error){
   setIsLoading(false);
@@ -50,7 +52,7 @@ const Login = () => {
 
     return( 
 
-    <div className="row justify-content-center bg-gradient-primary">
+    <div className="row justify-content-center">
 
       <div className="col-xl-10 col-lg-11 col-md-10">
 
@@ -93,8 +95,9 @@ const Login = () => {
                         <label className="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
                     </div>
-                    <button type="submit"  className="btn btn-primary btn-user btn-block">
-                     <FontAwesomeIcon icon={faSign}/> Login
+                    {isLoading && <center> <Spinner animation="border" variant="primary" /></center>}
+                    <button type="submit"  className=" mt-3 btn btn-primary btn-user btn-block">
+                     <FontAwesomeIcon icon={faSignInAlt}/> Login
                     </button>
                   </form>
                   <hr/>
