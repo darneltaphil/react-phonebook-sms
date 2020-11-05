@@ -1,12 +1,12 @@
-import React, {useState, useEffect } from "react"
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
+import React, { useState, useEffect } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {  faPlus, faSms } from "@fortawesome/free-solid-svg-icons"
 import Modal from 'react-bootstrap/Modal'
 import CustomerForm from "./CustomerForm"
 import CustomerSearchForm from "./CustomerSearchForm"
 import SmsForm from "../Sms/SmsForm"
 import CustomerList from "./CustomerList"
-import {VALIDATOR_REQUIRE} from '../Utils/Validators'
+import { VALIDATOR_REQUIRE } from '../Utils/Validators'
 import swal from "sweetalert2"
 import axios from "axios"
 
@@ -21,20 +21,26 @@ const handleSmsModalClose = () => setSmsModal(false);
 const handleSmsModalShow = () => setSmsModal(true);
 
 const [send, setSend] = useState([]);
+const [noContact, setNoContact] = useState();
 
 const phonebook = async () => {
 
- const uid= localStorage.getItem('currentUserId')
+  const uid= localStorage.getItem('currentUserId')
 
  try { 
    const responseData = await axios.get('http://localhost:4000/api/customers/'+uid)
                         .then(response => {
                           console.log(response)
+                                if(response.data.no_contact){
+                                    setNoContact(response.data.no_contact)
+                                }else{
                                   if(response.data.customers === false){
                                     swal.fire("Customer database could not be reached",)
                                 }else{
                                         setSend(response.data.customers) 
                                     }
+                                }
+                                  
                                   })
 
  }catch(error){
@@ -86,8 +92,8 @@ return (
           </div>
           <div className="card-body pl-3" >
               <CustomerSearchForm validator={[VALIDATOR_REQUIRE()]}  />
-
-              <CustomerList  items={send}/>
+              {noContact ? "<center>You have no contact</center>" : <CustomerList  items={send}/>}
+              
           </div>
         </div>
       </div>
