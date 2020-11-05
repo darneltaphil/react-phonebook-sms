@@ -1,17 +1,16 @@
-import React, {useState, useContext} from "react"
+import React, { useState, useContext } from "react"
 import { Link } from "react-router-dom"
 import {
    VALIDATOR_EMAIL,
   } from "../Utils/Validators"
-  import {AuthContext} from "../Shared/context/auth-context"
-  import {FontAwesomeIcon} from "@fortawesome/react-fontawesome"
-  import {  faSign} from "@fortawesome/free-solid-svg-icons"
-    
+  import { AuthContext } from "../Shared/context/auth-context"
+  import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+  import { faSign } from "@fortawesome/free-solid-svg-icons"
+  import alertify from "alertifyjs";
 const Login = () => {
-  
-  let  baseURL = "http://localhost:4000/api/user/login"
-
   const auth= useContext(AuthContext);
+
+  let  baseURL = "http://localhost:4000/api/user/login"
 
   const [email , setEmail ]= useState('')
   const [password, setPassword] = useState('')
@@ -21,21 +20,19 @@ const Login = () => {
     password : password,
   }
  
- const authSubmitHandler = e => {
+ const authSubmitHandler =async  e => {
   e.preventDefault();
   try{
     fetch(baseURL, {
-    method: "POST",
-    headers : {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(data)
+      method: "POST",
+      headers : {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
   })
   .then( response =>{
     if(response){
          auth.login();   
-
-
     }
 })  
   }catch(error){
@@ -45,22 +42,18 @@ const Login = () => {
 
     return( 
 
-<div className="">
+    <div className="row justify-content-center bg-gradient-primary">
 
-
-
-    <div className="row justify-content-center">
-
-      <div className="col-xl-10 col-lg-12 col-md-9">
+      <div className="col-xl-10 col-lg-11 col-md-10">
 
         <div className="card o-hidden border-0 shadow-lg my-5">
           <div className="card-body p-0">
             <div className="row">
-              <div className="col-lg-6 d-none d-lg-block bg-login-image"></div>
+              <div className="col-lg-6     bg-login-image"></div>
               <div className="col-lg-6">
                 <div className="p-5">
                   <div className="text-center">
-                    <h1 className="h4 text-gray-900 mb-4 display-4">Safe Login </h1>
+                    <h1 className="h4 text-primary mb-4 display-4">Safe Login </h1>
                   </div>
                   <form className="user" onSubmit={authSubmitHandler}>
                     <div className="form-group">
@@ -80,7 +73,8 @@ const Login = () => {
                        className="form-control form-control-user" 
                        id="exampleInputPassword" 
                        placeholder="Password"
-                       validators={[VALIDATOR_EMAIL()]}  required/>
+                       validators={[VALIDATOR_EMAIL()]}  required
+                       onClick={()=>{ alertify.success('Success message');}} />
                     </div>
                     <div className="form-group">
                       <div className="custom-control custom-checkbox small">
@@ -94,14 +88,10 @@ const Login = () => {
                     <button type="submit"  className="btn btn-primary btn-user btn-block">
                      <FontAwesomeIcon icon={faSign}/> Login
                     </button>
-                    {/* <hr/>
-                    <a href="index.html" className="btn btn-google btn-user btn-block">
-                      <i className="fab fa-google fa-fw"></i> Login with Google
-                    </a> */}
                   </form>
                   <hr/>
                   <div className="text-center">
-                    <span className="small" >Forgot Password?</span>
+                    <Link to="/reset" className="small" >Forgot Password?</Link>
                   </div>
                   <div className="text-center">
                     <Link to="/signup" className="small">Create an Account!</Link>
@@ -115,10 +105,6 @@ const Login = () => {
       </div>
 
     </div>
-
-  </div>
-
-
     )
 }
 export default Login

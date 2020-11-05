@@ -17,9 +17,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./components/Shared/sb-admin-2.css";  
 import Settings from './components/Settings/Settings';
 import {AuthContext} from "./components/Shared/context/auth-context"
+import Reset from './components/Reset/Reset';
 
 const  App = () =>  {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => { return (false)});
 
   const login = useCallback(() => {
     setIsLoggedIn(true);
@@ -37,7 +38,7 @@ if(isLoggedIn){
   routes = (
      <React.Fragment>
      <Navigation /> 
-       <Route path="/Customer" exact >
+       <Route path="/customer" exact >
         <Customer />
       </Route>
       <Route path="/sms" exact>
@@ -46,7 +47,7 @@ if(isLoggedIn){
       <Route path="/settings" exact>
         <Settings/>
       </Route> 
-      <Redirect to="/Customer" /> 
+      <Redirect to="/customer" /> 
      </React.Fragment>  
   );
 }else{
@@ -58,6 +59,9 @@ if(isLoggedIn){
       <Route path="/signup" exact >
        <Signup />
      </Route>
+      <Route path="/reset" exact >
+       <Reset />
+     </Route>
      <Redirect to="/login" /> 
     </React.Fragment>  
   );
@@ -66,26 +70,15 @@ if(isLoggedIn){
   return (
 
       
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login : login , logout: logout }} >
-      <BrowserRouter>
-      <Switch>
-      {/* {auth.isLoggedIn && ( */}
+<AuthContext.Provider value={{isLoggedIn: isLoggedIn, login : login , logout: logout }} >
+  <BrowserRouter>
+    <Switch>
       <Router >
-       {/* <div id="wrapper"> */}
-  
-            {/* <div id="content-wrapper" className="d-flex flex-column"> */}
-                {/* <div id="content container"> */}
-                {routes}
-                {/* </div> */}
-            {/* </div> */}
-            
-        {/* </div>  */}
-        </Router>
-        {/* )} */}
-
-                </Switch>
-         </BrowserRouter>
-  </AuthContext.Provider>
+        {routes}
+      </Router>
+    </Switch>
+  </BrowserRouter>
+</AuthContext.Provider>
   
   );
 }
