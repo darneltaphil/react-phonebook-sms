@@ -30,7 +30,6 @@ const  App = () =>  {
     setIsLoggedIn(false);
   }, [])
 
-//const auth= useContext(AuthContext);
 
 let routes ; 
 
