@@ -1,19 +1,15 @@
 import React, { useContext } from "react"
-import { useHistory } from "react-router-dom "
+import { useHistory } from "react-router-dom"
 import Image from 'react-bootstrap/Image'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
-import Swal from 'sweetalert2'
 import { AuthContext } from "../Shared/context/auth-context"
 
 let baseUrl = "http://localhost:4000/api/customers/"
 const CustomerForm = () => {
   const auth = useContext(AuthContext);
-  // const [show, setShow] = useState(false);
-  // const handleCustomerModalClose = () => setShow(false);
-  //let uid= localStorage.getItem('currentUserId')
- 
+
 const history = useHistory()
 
   const handleSubmit = async (e) =>{
@@ -47,7 +43,8 @@ const history = useHistory()
     // })
 
     //Redirect the user to a different page
-    history.push("/customer")
+    history.push("/settings")
+
       }catch(error){
 
       }
