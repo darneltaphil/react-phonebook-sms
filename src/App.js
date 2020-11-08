@@ -7,7 +7,6 @@ import {
   BrowserRouter
 } from "react-router-dom"
 
-// import Dashboard from "./components/Dashboard/Dashboard"
 import Customer from "./components/Customer/Customer"
 import Sms from "./components/Sms/Sms"
 import Login from "./components/Login/Login"
