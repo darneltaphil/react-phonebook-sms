@@ -30,12 +30,12 @@ const phonebook = async () => {
  try { 
    const responseData = await axios.get('http://localhost:4000/api/customers/'+uid)
                         .then(response => {
-                          console.log(response)
+                          //console.log(response)
                                 if(response.data.no_contact){
                                     setNoContact(response.data.no_contact)
                                 }else{
                                   if(response.data.customers === false){
-                                    swal.fire("Customer database could not be reached",)
+                                    swal.fire("Contacts list database could not be reached",)
                                 }else{
                                         setSend(response.data.customers) 
                                     }
@@ -44,7 +44,7 @@ const phonebook = async () => {
                                   })
 
  }catch(error){
-
+  
  }
 };
 

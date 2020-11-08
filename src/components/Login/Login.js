@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react"
+import React, { useState, useContext, useEffect } from "react"
 import { Link } from "react-router-dom"
 import {
    VALIDATOR_EMAIL,
@@ -16,13 +16,41 @@ const Login = () => {
 
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState()
+  const [checkValidEmail, setcheckValidEmail] = useState()
+  const [checkValidPassword, setcheckValidPassword] = useState()
   const [email , setEmail ]= useState('')
   const [password, setPassword] = useState('')
 
-  const data = {
+  var validEmail = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+  
+
+  useEffect( () => {
+    // const handleEmailChange()
+  if (!validEmail.test(email)) {
+    setcheckValidEmail(false);
+  }else{
+    setcheckValidEmail(true);
+  }
+  }, [email])
+
+  useEffect( () => {
+
+    if (password.length<6) {
+      setcheckValidPassword(false);
+  }else{
+    setcheckValidPassword(true);
+  }
+  }, [password])
+
+  let data
+if(checkValidEmail && checkValidPassword){
+   data = {
     email : email,
     password : password,
   }
+}
+  
  
  const authSubmitHandler =async  e => {
   e.preventDefault();
@@ -36,13 +64,13 @@ const Login = () => {
           
     const responseData = await response.json()
     
-   // console.log(responseData)
     if(!response.ok){
       setIsLoading(false);
       return new Error (responseData.message)
-    }
-    localStorage.setItem('currentUserId', responseData.userid)
-    auth.login()
+    } 
+
+    localStorage.setItem('currentUserId', responseData.userId.id)
+    auth.login(responseData.userId.id)
  
  }catch(error){
   setIsLoading(false);
@@ -71,10 +99,13 @@ const Login = () => {
                       onChange={e =>{setEmail(e.target.value)}}
                       type="email" 
                       className="form-control form-control-user" 
-                      id="exampleInputEmail" 
+                      id="email" 
                       aria-describedby="emailHelp" 
                       placeholder="Enter Email Address..."
-                      validators={[VALIDATOR_EMAIL()]} required />
+                      validators={[VALIDATOR_EMAIL()]} 
+                      required 
+                      style={ !checkValidEmail ? {border: 'solid red 1px'  } : {border: 'solid green 2px'  } }
+                      />
                     </div>
                     <div className="form-group">
                       <input 
@@ -83,10 +114,12 @@ const Login = () => {
                        className="form-control form-control-user" 
                        id="exampleInputPassword" 
                        placeholder="Password"
-                       validators={[VALIDATOR_EMAIL()]}  required
-                        />
+                       validators={[VALIDATOR_EMAIL()]}  
+                       required
+                       style={ !checkValidPassword ? {border: 'solid red 1px'  } : {border: 'solid green 2px'  } }
+                       />
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                       <div className="custom-control custom-checkbox small">
                         <input 
                         type="checkbox" 
@@ -94,9 +127,11 @@ const Login = () => {
                         id="customCheck"/>
                         <label className="custom-control-label" for="customCheck">Remember Me</label>
                       </div>
-                    </div>
+                    </div> */}
+
                     {isLoading && <center> <Spinner animation="border" variant="primary" /></center>}
-                    <button type="submit"  className=" mt-3 btn btn-primary btn-user btn-block">
+
+                    <button type="submit"  className=" mt-3 btn btn-primary btn-user btn-block" disabled ={!checkValidEmail || !checkValidPassword}>
                      <FontAwesomeIcon icon={faSignInAlt}/> Login
                     </button>
                   </form>

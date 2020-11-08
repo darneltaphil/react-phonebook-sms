@@ -1,16 +1,22 @@
-import React from "react"
+import React, { useContext } from "react"
+import { useHistory } from "react-router-dom "
 import Image from 'react-bootstrap/Image'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import Swal from 'sweetalert2'
+import { AuthContext } from "../Shared/context/auth-context"
+
 let baseUrl = "http://localhost:4000/api/customers/"
 const CustomerForm = () => {
+  const auth = useContext(AuthContext);
   // const [show, setShow] = useState(false);
   // const handleCustomerModalClose = () => setShow(false);
-  let uid= localStorage.getItem('currentUserId')
+  //let uid= localStorage.getItem('currentUserId')
+ 
+const history = useHistory()
 
-  const handleSubmit = (e) =>{
+  const handleSubmit = async (e) =>{
     e.preventDefault();
     const data = {
       name : e.target[0].value,
@@ -19,27 +25,29 @@ const CustomerForm = () => {
       address : e.target[3].value,
       city : e.target[4].value,
       gps : e.target[5].value,
-      creator: uid
+      creator: auth.userId
     }
 
     try{
-        fetch(baseUrl, {
+       await fetch(baseUrl, {
         method: "POST",
         headers : {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(data)
       })
-      .then( response =>{
-        if(response.status){
-           Swal.fire({
-            type: "success",
-            timer: 2000,
-            text: "Contact Saved"})
-
+    //   .then( response =>{
+    //     if(response.status){
+    //        Swal.fire({
+    //         type: "success",
+    //         timer: 2000,
+    //         text: "Contact Saved"})
            
-        }
-    })
+    //     }
+    // })
+
+    //Redirect the user to a different page
+    history.push("/customer")
       }catch(error){
 
       }

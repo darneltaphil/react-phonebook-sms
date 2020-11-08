@@ -49,7 +49,7 @@ import {
         setIsLoading(false);
         return new Error (responseData.message)
       }
-            localStorage.setItem('currentUserId', responseData.userid)
+            localStorage.setItem('currentUserId', responseData.userId.id)
             auth.login()
  
   }catch(error){
