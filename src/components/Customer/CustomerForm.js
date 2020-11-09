@@ -32,15 +32,7 @@ const history = useHistory()
         },
         body: JSON.stringify(data)
       })
-    //   .then( response =>{
-    //     if(response.status){
-    //        Swal.fire({
-    //         type: "success",
-    //         timer: 2000,
-    //         text: "Contact Saved"})
-           
-    //     }
-    // })
+
 
     //Redirect the user to a different page
     history.push("/settings")
