@@ -10,6 +10,7 @@ const Reset = () => {
     const [email , setEmail ]= useState('')
     const authSubmitHandler = e => {
         e.preventDefault();
+        alert('Parssword Recovery email was sent successfully')
        }
 
        
