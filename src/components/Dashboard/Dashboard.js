@@ -23,11 +23,8 @@ const Dashboard = ()=> {
                   </div>
               </div>
               <div className="card-body">
-                
-
-                  <div id="splash" className=""></div>
-                  
-                  
+                       <div id="splash" className=""></div>
+                         
               </div>
             </div>
           </div>
