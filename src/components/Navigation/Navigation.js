@@ -28,7 +28,7 @@ const Navigation = () => {
     return (
         <Navbar  expand="lg" className=" bg-gradient-primary text-white mb-3 ">
         <Navbar.Brand  className=" text-white  pr-5 ">
-                STAY-UP
+                ENGAGE.io
         </Navbar.Brand> 
         <Navbar.Toggle aria-controls="responsive-navbar-nav" className=" text-white  " />
 

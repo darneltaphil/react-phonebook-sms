@@ -52,8 +52,8 @@ const CustomerItem = props => {
 
   const handleSmsModalShow = e => {
     setSmsModal(true);
-    setSmsNumber(e.target.id) 
-    console.log(smsNumber)
+    setSmsNumber(e.target.id) ;
+    //console.log(smsNumber)
     localStorage.setItem('number',props.mobile)
     
   };
@@ -86,7 +86,7 @@ const CustomerItem = props => {
               : "" 
             }
             <ButtonGroup aria-label="Basic example" className="d-flex d-none d-sm-block"  >
-                <Button variant="primary"id={props.mobile} title="Call"   > 
+                <Button variant="primary" id={props.mobile} title="Call"   > 
                     <FontAwesomeIcon icon={faPhone} /> 
                 </Button>
                 <Button variant="success" id={props.mobile} title="Send SMs" onClick={handleSmsModalShow}>        
